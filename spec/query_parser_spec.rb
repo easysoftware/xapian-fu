@@ -20,6 +20,22 @@ describe QueryParser do
       terms.should_not include "Zfish"
     end
 
+    it "should use stopper from options" do
+      xdb = XapianDb.new(stemmer: :english)
+      qp = QueryParser.new(database: xdb, language: :french)
+      terms = qp.parse_query("avec and").terms.collect { |t| t.term }
+      terms.should_not include "Zavec"
+      terms.should include "Zand"
+    end
+
+    it "should use stemmer from options" do
+      xdb = XapianDb.new(stemmer: :english)
+      qp = QueryParser.new(database: xdb, language: :french)
+      terms = qp.parse_query("contournait fishing").terms.collect { |t| t.term }
+      terms.should include "Zcontourn"
+      terms.should_not include "Zfish"
+    end
+
     it "should use the :fields option to set field names" do
       qp = QueryParser.new(:fields => [:name, :age])
       terms = qp.parse_query("name:john age:30").terms.collect { |t| t.term }

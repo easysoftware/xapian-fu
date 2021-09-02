@@ -26,8 +26,8 @@ module XapianFu
     #
     # Currently, all fields are stored in the database. This will
     # change to store only those fields requested to be stored.
-    def add(doc)
-      doc = XapianDoc.new(doc) unless doc.is_a? XapianDoc
+    def add(doc, options = {})
+      doc = XapianDoc.new(doc, options) unless doc.is_a? XapianDoc
       doc.db = @xdb
       doc.save
       doc

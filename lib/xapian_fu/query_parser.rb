@@ -71,6 +71,8 @@ module XapianFu #:nodoc:
       self.default_op = @options[:default_op]
       self.database = @options[:database]
       @options[:cjk] ||= database.cjk if database
+      @stemmer = @options[:language] || database&.stemmer
+      @stopper = @options[:language] || database&.stopper
     end
 
     # Parse the given query and return a Xapian::Query object
@@ -98,8 +100,8 @@ module XapianFu #:nodoc:
       else
         qp = Xapian::QueryParser.new
         qp.database = xapian_database if xapian_database
-        qp.stopper = database.stopper if database && database.stopper
-        qp.stemmer = database.stemmer if database && database.stemmer
+        qp.stopper = StopperFactory.stopper_for(@stopper) if @stopper
+        qp.stemmer = StemFactory.stemmer_for(@stemmer) if @stemmer
         qp.default_op = xapian_default_op
         qp.stemming_strategy = xapian_stemming_strategy
 

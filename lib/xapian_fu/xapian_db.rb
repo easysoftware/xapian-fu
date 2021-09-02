@@ -246,8 +246,8 @@ module XapianFu #:nodoc:
     end
 
     # Short-cut to documents.add
-    def add_doc(doc)
-      documents.add(doc)
+    def add_doc(doc, options = {})
+      documents.add(doc, options)
     end
     alias_method "<<", :add_doc
 

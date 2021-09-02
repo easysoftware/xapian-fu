@@ -327,6 +327,23 @@ describe XapianDb do
       terms.should include("XCOLORSlight blue")
       terms.should include("XCOLORSred")
     end
+
+    it 'should generate terms by doc language' do
+      xdb = XapianDb.new(language: 'german')
+      xdb << XapianDoc.new({ title: 'fishing contournait' }, language: 'english')
+      xdb.add_doc({ title: 'fishing contournait' }, language: 'french')
+      xdb.flush
+
+      doc = xdb.documents.find(1)
+      terms = doc.terms.map(&:term)
+      terms.should include("ZXTITLEcontournait")
+      terms.should include("ZXTITLEfish")
+
+      doc = xdb.documents.find(2)
+      terms = doc.terms.map(&:term)
+      terms.should include("ZXTITLEcontourn")
+      terms.should include("ZXTITLEfishing")
+    end
   end
 
   describe "search" do

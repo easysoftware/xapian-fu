@@ -49,9 +49,8 @@ describe StopperFactory do
       end
     end
 
-
-    it "should raise a UnsupportedStopperLanguage error if there is no data for the given language" do
-      Proc.new { StopperFactory.stop_words_for(:no_existy) }.should raise_error UnsupportedStopperLanguage
+    it "should return empty Xapian::SimpleStopper if there is no data for the given language" do
+      StopperFactory.stopper_for(:no_existy).description.should === Xapian::SimpleStopper.new.description
     end
 
     it "should return characters in utf8" do

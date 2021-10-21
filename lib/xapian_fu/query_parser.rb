@@ -70,7 +70,10 @@ module XapianFu #:nodoc:
       self.stemming_strategy = @options[:stemming_strategy]
       self.default_op = @options[:default_op]
       self.database = @options[:database]
-      @options[:cjk] ||= database.cjk if database
+      if database
+        @options[:cjk] ||= database.cjk
+        @options[:partial] ||= database.partial
+      end
       @stemmer = @options[:language] || database&.stemmer
       @stopper = @options[:language] || database&.stopper
     end
@@ -156,7 +159,7 @@ module XapianFu #:nodoc:
       if @flags
         @flags
       else
-        valid_flags = [:boolean, :boolean_anycase, :wildcards, :lovehate, :spelling, :pure_not, :synonyms, :phrase, :cjk]
+        valid_flags = [:boolean, :boolean_anycase, :wildcards, :lovehate, :spelling, :pure_not, :synonyms, :phrase, :cjk, :partial]
         @flags = valid_flags.delete_if { |vf| not @options[vf] }
       end
     end
@@ -174,6 +177,7 @@ module XapianFu #:nodoc:
       qflags |= Xapian::QueryParser::FLAG_AUTO_SYNONYMS if flags.include?(:synonyms)
       qflags |= Xapian::QueryParser::FLAG_PHRASE if flags.include?(:phrase)
       qflags |= Xapian::QueryParser::FLAG_CJK_NGRAM if flags.include?(:cjk)
+      qflags |= Xapian::QueryParser::FLAG_PARTIAL if flags.include?(:partial)
       qflags
     end
 

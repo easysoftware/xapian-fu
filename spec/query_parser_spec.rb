@@ -79,6 +79,12 @@ describe QueryParser do
       terms.should include "乐".force_encoding('ASCII-8BIT')
     end
 
+    it "should use the database's partial flag" do
+      xdb = XapianDb.new(partial: true)
+      qp = QueryParser.new(database: xdb)
+      expect(qp.xapian_flags & Xapian::QueryParser::FLAG_PARTIAL).not_to be_zero
+    end
+
   end
 
 end

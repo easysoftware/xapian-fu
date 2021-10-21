@@ -550,6 +550,16 @@ describe XapianDb do
       xdb.search('日').should == [doc1]
     end
 
+    it "should do partial search" do
+      xdb = XapianDb.new(partial: true)
+      doc1 = xdb << "abc"
+      doc2 = xdb << "abcdef"
+      doc3 = xdb << "abcxyz"
+      xdb.search("abc").should == [doc1, doc2, doc3]
+      xdb.search("abc ").should == [doc1]
+      xdb.search("abcdef").should == [doc2]
+    end
+
     describe "with special queries" do
       before do
         @xdb = XapianDb.new

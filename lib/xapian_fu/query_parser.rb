@@ -72,7 +72,7 @@ module XapianFu #:nodoc:
       self.database = @options[:database]
       if database
         @options[:cjk] ||= database.cjk
-        @options[:partial] ||= database.partial
+        @options[:partial] = database.partial unless @options.has_key?(:partial)
       end
       @stemmer = @options[:language] || database&.stemmer
       @stopper = @options[:language] || database&.stopper

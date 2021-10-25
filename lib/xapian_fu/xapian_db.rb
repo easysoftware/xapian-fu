@@ -171,6 +171,7 @@ module XapianFu #:nodoc:
     # An array of fields that will be treated as boolean terms
     attr_reader :boolean_fields
     # Whether this db will generate a spelling dictionary during indexing
+    attr_reader :partial
     attr_reader :spelling
     attr_reader :cjk
     attr_reader :sortable_fields
@@ -212,6 +213,7 @@ module XapianFu #:nodoc:
       @store_values = @store_values.flatten.uniq.compact
       @spelling = @options[:spelling]
       @cjk = @options[:cjk]
+      @partial = @options[:partial]
       @weights_function = @options[:weights]
     end
 

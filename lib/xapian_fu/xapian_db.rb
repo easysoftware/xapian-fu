@@ -170,10 +170,12 @@ module XapianFu #:nodoc:
 
     # An array of fields that will be treated as boolean terms
     attr_reader :boolean_fields
-    # Whether this db will generate a spelling dictionary during indexing
     attr_reader :partial
+    # Whether this db will generate a spelling dictionary during indexing
     attr_reader :spelling
     attr_reader :cjk
+    # Store synonyms for words with diacritics chars
+    attr_reader :process_diacritics
     attr_reader :sortable_fields
     attr_reader :field_options
     attr_accessor :weights_function
@@ -214,6 +216,7 @@ module XapianFu #:nodoc:
       @spelling = @options[:spelling]
       @cjk = @options[:cjk]
       @partial = @options[:partial]
+      @process_diacritics = @options[:process_diacritics]
       @weights_function = @options[:weights]
     end
 

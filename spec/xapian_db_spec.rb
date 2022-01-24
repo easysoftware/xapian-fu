@@ -633,6 +633,17 @@ describe XapianDb do
 
       results.map(&:id).should == [1]
     end
+
+    it "should recognize diacritics chars" do
+      xdb = XapianDb.new(:dir => tmp_dir, :create => true,
+                         :fields => [:name], :process_diacritics => true)
+
+      xdb << { name: "nábor" }
+      xdb.flush
+
+      xdb.search("nábor").should_not be_empty
+      xdb.search("nabor", synonyms: true).should_not be_empty
+    end
   end
 
   describe "filtering" do

@@ -1,3 +1,8 @@
+=== 1.9.1 (11nd Fabruary 2022)
+
+* rspec version conflict -> remove development_dependencies. | [@lukas](https://git.easy.cz/lukas)
+* Use copies of terms instead synonyms for diacritics. | [#528799](https://es.easyproject.com/issues/528799) | [@panov.eduard.k](https://git.easy.cz/panov.eduard.k)
+
 === 1.7.0 (22nd March 2020)
 
 * Add support for setting stemmer_strategy

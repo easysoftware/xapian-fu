@@ -22,7 +22,7 @@ Gem::Specification.new do |s|
     '--line-numbers'
 
   s.extra_rdoc_files = ["README.rdoc", "LICENSE", "CHANGELOG.rdoc"]
-  s.allowed_push_host = "https://rubygems.org,https://gems.easysoftware.com"
+  s.metadata['allowed_push_host'] = "https://rubygems.org,https://gems.easysoftware.com"
 
   s.add_development_dependency("rspec", "~> 2.7")
   s.add_development_dependency("rake", "~> 0")

@@ -16,6 +16,7 @@ Gem::Specification.new do |s|
   s.files = Dir.glob("lib/**/*") + Dir.glob("examples/**/*")
   s.test_files = Dir.glob("spec/**/*")
   s.require_paths = ["lib"]
+  s.metadata["easy"] = "true"
 
   s.rdoc_options << '--title' << 'Xapian Fu' <<
     '--main' << 'README.rdoc' <<

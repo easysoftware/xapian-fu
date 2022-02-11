@@ -357,14 +357,6 @@ module XapianFu #:nodoc:
           # add value without field name
           tg.send(index_method, v, weight) unless fields_with_field_names_only.include?(k)
 
-          if db.process_diacritics
-            diacritics = DEFAULT_APPROXIMATIONS.keys.join
-            words_with_diacritics = v.scan(/\b(?=\w*[#{diacritics}])\p{M}*\p{L}*\w{3,}/)
-            words_with_diacritics.each do |word|
-              db.add_synonym(word.gsub(/[#{diacritics}]/u, DEFAULT_APPROXIMATIONS).downcase, word.downcase)
-            end
-          end
-
           if db.field_options[k] && db.field_options[k][:exact]
             xapian_document.add_term("X#{k.to_s.upcase}#{v.to_s.downcase}", weight)
           end
@@ -374,6 +366,19 @@ module XapianFu #:nodoc:
       db.boolean_fields.each do |name|
         Array(fields[name]).each do |value|
           xapian_document.add_boolean_term("X#{name.to_s.upcase}#{value.to_s.downcase}")
+        end
+      end
+
+      # Adding copies of terms without diacritics
+      # NOTE: Terms are added without positional information. Also snippet highlight will not work for them.
+      if db.process_diacritics
+        diacritics = DEFAULT_APPROXIMATIONS.keys.join
+        diacritics_terms = xapian_document.terms.select do |t|
+          t.term.force_encoding(Encoding::UTF_8).scan(/\b(?=\w*[#{diacritics}])\p{M}*\p{L}*\w{3,}/).any?
+        end
+        diacritics_terms.each do |t|
+          term_name = t.term.force_encoding(Encoding::UTF_8)
+          xapian_document.add_term(term_name.gsub(/[#{diacritics}]/u, DEFAULT_APPROXIMATIONS), t.wdf)
         end
       end
 

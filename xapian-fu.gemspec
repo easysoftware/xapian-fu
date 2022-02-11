@@ -16,13 +16,13 @@ Gem::Specification.new do |s|
   s.files = Dir.glob("lib/**/*") + Dir.glob("examples/**/*")
   s.test_files = Dir.glob("spec/**/*")
   s.require_paths = ["lib"]
+  s.metadata["easy"] = "true"
 
   s.rdoc_options << '--title' << 'Xapian Fu' <<
     '--main' << 'README.rdoc' <<
     '--line-numbers'
 
   s.extra_rdoc_files = ["README.rdoc", "LICENSE", "CHANGELOG.rdoc"]
-  s.metadata['allowed_push_host'] = "https://rubygems.org,https://gems.easysoftware.com"
 
   s.add_development_dependency("rspec", "~> 2.7")
   s.add_development_dependency("rake", "~> 0")

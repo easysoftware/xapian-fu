@@ -638,11 +638,11 @@ describe XapianDb do
       xdb = XapianDb.new(:dir => tmp_dir, :create => true,
                          :fields => [:name], :process_diacritics => true)
 
-      xdb << { name: "nábor" }
+      xdb << { name: "cédéčko" }
       xdb.flush
 
-      xdb.search("nábor").should_not be_empty
-      xdb.search("nabor", synonyms: true).should_not be_empty
+      xdb.search("cédéčko").should_not be_empty
+      xdb.search("cedecko").should_not be_empty
     end
   end
 

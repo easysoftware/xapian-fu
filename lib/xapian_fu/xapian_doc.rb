@@ -374,7 +374,7 @@ module XapianFu #:nodoc:
       if db.process_diacritics
         diacritics = DEFAULT_APPROXIMATIONS.keys.join
         diacritics_terms = xapian_document.terms.select do |t|
-          t.term.force_encoding(Encoding::UTF_8).scan(/\b(?=\w*[#{diacritics}])\p{M}*\p{L}*\w{3,}/).any?
+          t.term.force_encoding(Encoding::UTF_8).scan(/\b(?=\w*[#{diacritics}])\p{M}*\p{L}*/).any?
         end
         diacritics_terms.each do |t|
           term_name = t.term.force_encoding(Encoding::UTF_8)

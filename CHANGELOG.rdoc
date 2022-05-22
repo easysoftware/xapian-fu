@@ -1,3 +1,7 @@
+=== 1.9.2 (22nd May 2022)
+
+* Improve diacritics detection. | [#528799](https://es.easyproject.com/issues/528799) | [@panov.eduard.k](https://git.easy.cz/panov.eduard.k)
+
 === 1.9.1 (11nd Fabruary 2022)
 
 * rspec version conflict -> remove development_dependencies. | [@lukas](https://git.easy.cz/lukas)

@@ -28,7 +28,7 @@ module XapianFu
 
     # Read and parse the stop words file for the given language, returning an array of words
     def self.stop_words_for(lang)
-      return [] unless File.exists?(stop_words_filename(lang))
+      return [] unless File.exist?(stop_words_filename(lang))
 
       words = []
       # Open files with correct encoding

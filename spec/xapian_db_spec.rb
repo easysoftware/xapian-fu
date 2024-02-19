@@ -9,7 +9,7 @@ tmp_dir = '/tmp/xapian_fu_test.db'
 
 describe XapianDb do
   before do
-    FileUtils.rm_rf tmp_dir if File.exists?(tmp_dir)
+    FileUtils.rm_rf tmp_dir if File.exist?(tmp_dir)
   end
 
   describe "new" do
@@ -22,7 +22,7 @@ describe XapianDb do
     it "should make an on-disk database when given a :dir option" do
       xdb = XapianDb.new(:dir => tmp_dir, :create => true)
       xdb.rw
-      File.exists?(tmp_dir).should be_truthy
+      File.exist?(tmp_dir).should be_truthy
       xdb.should respond_to(:dir)
       xdb.dir.should == tmp_dir
       xdb.rw.should be_a_kind_of(Xapian::WritableDatabase)
@@ -33,23 +33,23 @@ describe XapianDb do
 
   it "should lazily create the on-disk database when rw is used" do
     xdb = XapianDb.new(:dir => tmp_dir, :create => true)
-    File.exists?(tmp_dir).should be_falsey
+    File.exist?(tmp_dir).should be_falsey
     xdb.rw
-    File.exists?(tmp_dir).should be_truthy
+    File.exist?(tmp_dir).should be_truthy
   end
 
   it "should create a glass database when type is glass" do
     pending "this version of xapian doesn't support glass" unless defined?(Xapian::DB_BACKEND_GLASS)
     glassdir = tmp_dir + 'glass'
     XapianDb.new(:dir => glassdir, :create => true, :type => :glass).rw
-    File.exists?(glassdir + '/iamglass').should == true
+    File.exist?(glassdir + '/iamglass').should == true
   end
 
   it "should create a chert database when type is chert" do
     pending "this version of xapian doesn't support chert" unless defined?(Xapian::DB_BACKEND_CHERT)
     chertdir = tmp_dir + 'chert'
     XapianDb.new(:dir => chertdir, :create => true, :type => :chert).rw
-    File.exists?(chertdir + '/iamchert').should == true
+    File.exist?(chertdir + '/iamchert').should == true
   end
 
   it "should raise an exception when type is unrecognised" do

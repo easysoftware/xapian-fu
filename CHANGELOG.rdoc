@@ -1,3 +1,6 @@
+=== 1.9.3 (29th Jan 2024)
+* replace exists? with exist? for Ruby 3.2+ compatibility. | [@pavel](https://git.easy.cz/pavel)
+
 === 1.9.2 (22nd May 2022)
 
 * Improve diacritics detection. | [#528799](https://es.easyproject.com/issues/528799) | [@panov.eduard.k](https://git.easy.cz/panov.eduard.k)

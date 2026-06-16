@@ -31,10 +31,8 @@ module XapianFu
       return [] unless File.exist?(stop_words_filename(lang))
 
       words = []
-      # Open files with correct encoding
-      open_args = [stop_words_filename(lang), "r:UTF-8"]
-      open(*open_args) do |f|
-        while line = f.readline rescue nil
+      open(stop_words_filename(lang), "r:UTF-8") do |f|
+        while (line = f.readline) rescue nil
           words << line.split(" ", 2).first.downcase.strip  unless line =~ /^ +|^$|^\|/
         end
       end

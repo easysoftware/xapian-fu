@@ -4,14 +4,14 @@ require 'xapian_fu/version'
 Gem::Specification.new do |s|
   s.name    = 'xapian-fu'
   s.version = XapianFu::VERSION
-  s.date    = '2020-03-23'
+  s.date    = '2026-06-16'
   s.license = 'MIT'
-  s.summary = "A Ruby interface to the Xapian search engine"
+  s.summary = "EASY FORK - A Ruby interface to the Xapian search engine"
   s.description = "A library to provide a more Ruby-like interface to the Xapian search engine."
 
-  s.authors  = ['John Leach', 'Damian Janowski']
+  s.authors  = ['John Leach', 'Damian Janowski', 'Panov Eduard']
   s.email    = 'john@johnleach.co.uk'
-  s.homepage = 'https://github.com/johnl/xapian-fu'
+  s.homepage = 'https://git.easy8.com/devel/xapian-fu'
 
   s.files = Dir.glob("lib/**/*") + Dir.glob("examples/**/*")
   s.test_files = Dir.glob("spec/**/*")

@@ -5,6 +5,7 @@ gemspec
 group :test do
   gem "rspec", "~> 2.7"
   gem "xapian-ruby", "~> 1.4.9"
+  gem "open-uri"
 end
 
 gem "pry"
